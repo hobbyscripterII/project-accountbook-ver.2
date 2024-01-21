@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mariadb://localhost:3306/soft_account_book
+    username: root
+    password: 1234
+
+mybatis:
+  type-aliases-package: com.project.softaccountbook
+  mapper-locations: mappers/**/*.xml
+
+server:
+  port: 8090
