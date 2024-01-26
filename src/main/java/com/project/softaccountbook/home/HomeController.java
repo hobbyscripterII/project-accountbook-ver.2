@@ -1,4 +1,4 @@
-package com.project.softaccountbook.user.home;
+package com.project.softaccountbook.home;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
