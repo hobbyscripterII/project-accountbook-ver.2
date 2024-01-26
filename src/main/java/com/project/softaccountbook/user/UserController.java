@@ -11,18 +11,18 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class UserController {
     private final UserService service;
 
-    @GetMapping("sign-up")
+    @GetMapping("/sign-up")
     public String signUp() {
-        return "sign-up";
+        return "/sign-up";
     }
 
-    @GetMapping("sign-in")
+    @GetMapping("/sign-in")
     public String signIn() {
-        return "sign-in";
+        return "/sign-in";
     }
 
-    @GetMapping("sign-out")
+    @GetMapping("/sign-out")
     public String signOut() {
-        return "/";
+        return "/home";
     }
 }

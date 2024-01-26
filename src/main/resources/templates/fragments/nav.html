@@ -2,11 +2,33 @@
 <html lang="en"
       xmlns:th="http://www.thymeleaf.org"
       th:fragment="nav">
+
 <nav>
-    <ul>
-        <li><a th:href="@{/sign-up}">회원가입</a></li>
-        <li><a th:href="@{/sign-in}">로그인</a></li>
-        <li><a th:href="@{/sign-out}">로그아웃</a></li>
+    <ul class="nav-parent">
+        <a th:href="@{#}">커뮤니티</a>
+        <div class="nav-child-wrap">
+            <li class="nav-child"><a th:href="@{#}">공지사항</a></li>
+            <li class="nav-child"><a th:href="@{#}">자유 게시판</a></li>
+            <li class="nav-child"><a th:href="@{#}">건의 게시판</a></li>
+            <li class="nav-child"><a th:href="@{#}">질문 게시판</a></li>
+        </div>
     </ul>
+
+    <ul class="nav-parent">
+        <a th:href="@{#}">가계부 서비스</a>
+        <div class="nav-child-wrap">
+            <li class="nav-child"><a th:href="@{#}">사용 설명서</a></li>
+            <li class="nav-child"><a th:href="@{#}">가계부</a></li>
+            <li class="nav-child"><a th:href="@{#}">자산현황</a></li>
+            <li class="nav-child"><a></a></li>
+        </div>
+    </ul>
+
+    <ul class="nav-parent"><a th:href="@{/sign-up}">회원가입</a></ul>
+    <ul class="nav-parent"><a th:href="@{/sign-in}">로그인</a></ul>
+<!--    <ul class="nav-parent"><a th:href="@{/sign-out}">로그아웃</a></ul>-->
 </nav>
+<div class="banner">
+    <span>banner div</span>
+</div>
 </html>

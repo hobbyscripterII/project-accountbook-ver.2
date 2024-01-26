@@ -1,0 +1,61 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    position: absolute;
+    top: 50px;
+    width: 100%;
+    height: 40px;
+    background-color: white;
+    z-index: 9999;
+}
+
+.nav-parent {
+    box-sizing: border-box;
+    display: block;
+    width: 100%;
+    text-align: center;
+    padding: 10px 0 10px 0;
+}
+
+.nav-parent > a, .nav-child > a {
+    display: block;
+    width: 100%;
+    text-decoration: none;
+    color: black;
+    background-color: white;
+}
+
+.nav-child > a {
+    box-sizing: border-box;
+    height: 30px;
+    padding: 5px 0 5px 0;
+}
+
+.nav-child-wrap {
+    height: 500px;
+    display: block;
+    margin-top: 14px;
+    display: none;
+}
+
+.nav-parent:hover .nav-child-wrap {
+    box-sizing: border-box;
+    display: block;
+}
+
+.banner {
+    height: 120px;
+    background-color: lightgray;
+    position: absolute;
+    width: 100%;
+    top: 90px;
+}
+
+.banner > span {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-align: center;
+    font-size: 30px;
+    margin-top: 35px;
+}
