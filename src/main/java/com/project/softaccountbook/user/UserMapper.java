@@ -19,4 +19,7 @@ public interface UserMapper {
 
     // 5. 회원탈퇴(TDD 전용)
     int withdrawal(int iuser);
+
+    // 6. 닉네임 중복 체크
+    int nmChk(String nm);
 }

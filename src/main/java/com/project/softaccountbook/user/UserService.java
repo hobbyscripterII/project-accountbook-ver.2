@@ -9,4 +9,8 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class UserService {
     private final UserMapper mapper;
+
+    int nmChk(String nm) {
+        return mapper.nmChk(nm);
+    }
 }

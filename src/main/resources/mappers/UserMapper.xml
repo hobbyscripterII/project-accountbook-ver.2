@@ -13,4 +13,8 @@
         DELETE FROM user_tbl
         WHERE iuser = #{iuser}
     </delete>
+
+    <select id="nmChk">
+        SELECT COUNT(*) FROM user_tbl WHERE nm = #{nm}
+    </select>
 </mapper>
