@@ -1,8 +1,10 @@
 nav {
+    box-sizing: border-box;
     display: flex;
     justify-content: space-between;
-    position: absolute;
+    position: fixed;
     top: 50px;
+    left: 0;
     width: 100%;
     height: 40px;
     background-color: white;
@@ -14,13 +16,15 @@ nav {
     display: block;
     width: 100%;
     text-align: center;
-    padding: 10px 0 10px 0;
+    margin: 0;
 }
 
 .nav-parent > a, .nav-child > a {
-    display: block;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: 100%;
-    text-decoration: none;
+    height: 100%;
     color: black;
     background-color: white;
 }
@@ -33,8 +37,6 @@ nav {
 
 .nav-child-wrap {
     height: 500px;
-    display: block;
-    margin-top: 14px;
     display: none;
 }
 
@@ -44,11 +46,12 @@ nav {
 }
 
 .banner {
+    position: absolute;
+    top: 90px;
+    left: 0;
+    width: 100%;
     height: 120px;
     background-color: lightgray;
-    position: absolute;
-    width: 100%;
-    top: 90px;
 }
 
 .banner > span {

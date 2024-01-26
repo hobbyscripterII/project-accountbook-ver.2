@@ -1,23 +1,35 @@
 main {
+    position: absolute;
+    top: 210px;
+    left: 0;
     display: flex;
     flex-wrap: wrap;
     width: 100%;
-    position: absolute;
-    top: 210px;
-    padding: 5px;
+    padding: 5px 5px 400px 5px;
     box-sizing: border-box;
 }
 
 .form-sign-up {
+    display: block;
     width: 100%;
 }
 
 #div-teams-of-use {
     display: block;
     width: 100%;
+    text-align: center;
 }
 
-.errors {
+.errors, .errors-msg {
+    /*display: block;*/
+    /*width: 100%;*/
+    /*text-align: right;*/
     border-color: #dc3545;
     color: red;
+}
+
+.errors-msg {
+    display: block;
+    width: 100%;
+    text-align: right;
 }
