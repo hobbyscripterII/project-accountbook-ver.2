@@ -62,13 +62,13 @@ function emailSend() {
             url: '/email-send',
             data: {email : email},
             success: function (data) {
-                if (data === 1) {
-                    alert("인증 번호를 확인해주세요.");
-
-                    // 이메일 인증 코드 폼 활성화
-                    $('#tr-email-auth').css('display', 'block');
-                } else {
+                if (data === 2) {
+                    alert("이미 가입된 이메일입니다. 다른 이메일을 입력해주세요.");
+                } else if(data === 1) {
                     alert("잠시 후 다시 시도해주세요.");
+                } else {
+                    alert("이메일 확인 후 인증 코드를 입력해주세요.");
+                    $('#tr-email-auth').css('display', 'block'); // 이메일 인증 코드 폼 활성화
                 }
             }
         })

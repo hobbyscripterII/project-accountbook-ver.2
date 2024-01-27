@@ -13,7 +13,6 @@ import java.util.Properties;
 
 @Slf4j
 @Getter
-@Setter
 @ConfigurationProperties(prefix = "mail")
 @Configuration
 public class EmailConfig {

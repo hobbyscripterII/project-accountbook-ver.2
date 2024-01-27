@@ -74,11 +74,12 @@ public class UserController {
         boolean emailSend = service.emailSend(email);
         int emailChk = service.emailChk(email);
 
-        if (Utils.isNotNull(emailChk) || !Utils.isNotNull(emailSend)) {
-            return 0;
-        } else {
+        if (Utils.isNotNull(emailChk)) { // 이메일 중복
+            return 2;
+        } else if (!Utils.isNotNull(emailSend)) { // 이메일 전송 실패
             return 1;
         }
+        return 0;
     }
 
     // 이메일 인증 코드 확인
@@ -87,7 +88,7 @@ public class UserController {
     public int emailAuthCodeChk(@RequestBody UserEmailAuthDto dto) { // json으로 받을 때 @RequestBody 명시
         int emailAuthCodeChk = service.emailAuthCodeChk(dto);
 
-        if(Utils.isNotNull(emailAuthCodeChk)) {
+        if (Utils.isNotNull(emailAuthCodeChk)) {
             return 1;
         } else {
             return 0;
