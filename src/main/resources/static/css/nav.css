@@ -19,6 +19,12 @@ nav {
     margin: 0;
 }
 
+.nav-parent > a:hover, .nav-child > a:hover {
+    background-color: black;
+    color: white;
+    transition: 0.5s;
+}
+
 .nav-parent > a, .nav-child > a {
     display: flex;
     justify-content: center;

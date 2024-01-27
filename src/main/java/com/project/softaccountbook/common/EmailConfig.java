@@ -2,6 +2,7 @@ package com.project.softaccountbook.common;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.context.annotation.Bean;
@@ -20,6 +21,7 @@ public class EmailConfig {
 
     @Getter
     @Setter
+    @ToString
     public static class Mail {
         private String host;
         private int port;
@@ -30,6 +32,8 @@ public class EmailConfig {
 
     @Bean
     public JavaMailSender mailSender() {
+        log.info("mail = {}", mail);
+
         JavaMailSenderImpl sender = new JavaMailSenderImpl(); // JavaMailSender 구현체 생성
         sender.setHost(mail.getHost());
         sender.setPort(mail.getPort());
