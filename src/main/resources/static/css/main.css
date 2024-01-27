@@ -21,11 +21,10 @@ main {
 }
 
 .errors, .errors-msg {
-    /*display: block;*/
-    /*width: 100%;*/
-    /*text-align: right;*/
     border-color: #dc3545;
     color: red;
+    font-size: 12px;
+    font-weight: bold;
 }
 
 .errors-msg {
@@ -33,3 +32,15 @@ main {
     width: 100%;
     text-align: right;
 }
+
+.td-sign-up {
+    width: 130px;
+}
+
+#tr-email-auth {
+    display: none;
+}
+
+/*#input-email-auth {*/
+/*    display: block;*/
+/*}*/

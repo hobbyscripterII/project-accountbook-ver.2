@@ -1,5 +1,6 @@
 package com.project.softaccountbook.user;
 
+import com.project.softaccountbook.user.model.UserEmailAuthDto;
 import com.project.softaccountbook.user.model.UserEmailSignInDto;
 import com.project.softaccountbook.user.model.UserEmailSignInVo;
 import com.project.softaccountbook.user.model.UserSignUpDto;
@@ -14,6 +15,7 @@ public interface UserMapper {
     UserEmailSignInVo emailSignIn(UserEmailSignInDto dto);
 
     // 3. 로그인 시 방문 횟수 ++
+    int updateVisitCnt(int iuser);
 
     // 4. 회원 수정 (닉네임 중복 불가)
 
@@ -22,4 +24,10 @@ public interface UserMapper {
 
     // 6. 닉네임 중복 체크
     int nmChk(String nm);
+
+    int insertEmailAuthCode(UserEmailAuthDto dto);
+
+    int emailChk(String email);
+
+    int emailAuthCodeChk(UserEmailAuthDto dto);
 }

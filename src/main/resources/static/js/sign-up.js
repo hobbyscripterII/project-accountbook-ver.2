@@ -1,3 +1,4 @@
+
 function signUp() {
     const email = $('input[name=email]').val();
     const upw = $('input[name=upw]').val();
@@ -48,6 +49,32 @@ function signUp() {
     // }
 }
 
+function emailSend() {
+    // 이메일 정규식
+    let regex = new RegExp("([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\"\(\[\]!#-[^-~ \t]|(\\[\t -~]))+\")@([!#-'*+/-9=?A-Z^-~-]+(\.[!#-'*+/-9=?A-Z^-~-]+)*|\[[\t -Z^-~]*])");
+    let email = $('input[name=email]').val();
+
+    if(email === null || !regex.test(email)) {
+        alert("이메일 형식에 맞춰 입력해주세요.");
+    } else {
+        $.ajax({
+            type: 'get',
+            url: '/email-send',
+            data: {email : email},
+            success: function (data) {
+                if (data === 1) {
+                    alert("인증 번호를 확인해주세요.");
+
+                    // 이메일 인증 코드 폼 활성화
+                    $('#tr-email-auth').css('display', 'block');
+                } else {
+                    alert("잠시 후 다시 시도해주세요.");
+                }
+            }
+        })
+    }
+}
+
 function nmChk() {
     const nm = $('input[name=nm]').val();
 
@@ -57,7 +84,7 @@ function nmChk() {
         $.ajax({
             type: 'get',
             url: '/nm-chk',
-            data: {nm: nm},
+            data: {nm : nm},
             success: function (data) {
                 if (data === 1) {
                     alert("이미 등록된 닉네임입니다. 다른 닉네임을 입력해주세요.");
@@ -71,4 +98,29 @@ function nmChk() {
             }
         })
     }
+}
+
+function emailAuthChk() {
+    const email = $('input[name=email]').val();
+    const emailAuthCode = $('#input-email-auth-code');
+    // dto에 담으려면 프로퍼티명이랑 맞추기
+    const dto = {email : email, emailAuthCode: emailAuthCode.val()};
+
+    $.ajax({
+        type: 'post',
+        url: '/email-auth-chk',
+        contentType: "application/json", // http 요청 헤더 content-type을 application/json으로 맞춤
+        data: JSON.stringify(dto), // json 형태로 보내기 위한 작업
+        success: function (data) {
+            if (data === 1) {
+                alert("이메일 인증이 완료되었습니다.");
+                emailAuthCode.data('email-auth-chk', 1); // data-set 속성 변경
+                console.log(emailAuthCode.data('email-auth-chk')); // data-set 속성 확인
+            } else {
+                alert("이메일 인증 코드가 일치하지 않습니다.");
+                emailAuthCode.data('email-auth-chk', 0);
+                console.log(emailAuthCode.data('email-auth-chk'));
+            }
+        }
+    })
 }
