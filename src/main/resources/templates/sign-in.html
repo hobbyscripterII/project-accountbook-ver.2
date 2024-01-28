@@ -6,5 +6,32 @@
       layout:fragment="main">
 <main>
     <h1>로그인</h1>
+
+    <div class="div-wrap">
+        <div>
+            <form class="form" id="form-sign-in" th:object="${dto}" action="/process-login" method="post">
+                <div class="row alert alert-danger center errors" role="alert" th:if="${param.error != null}" style="text-align: center">
+                    <div>로그인 인증에 실패했습니다.</div>
+                </div>
+
+                <table style="width: 100%; display: flex">
+                    <tr>
+                        <td class="td-sign-in">이메일</td>
+                        <!-- security 적용 후 다시 email로 -->
+                        <td><input type="text" name="username" th:field="*{email}" data-email-chk="0" th:errorclass="errors" placeholder="이메일을 입력하세요." autocomplete="off"></td>
+                        <td><label class="errors-msg" th:errors="*{email}"></label></td>
+                    </tr>
+                    <tr>
+                        <td class="td-sign-in">비밀번호</td>
+                        <td><input type="password" name="password" th:field="*{upw}" th:errorclass="errors" placeholder="8~16자 영문 대/소문자, 숫자, 특수문자"></td>
+                        <td colspan="2" class="errors" th:errors="*{upw}"></td>
+                    </tr>
+                    <tr>
+                        <td colspan="3"><input type="submit" value="로그인" style="width: 100%"></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
 </main>
 </html>

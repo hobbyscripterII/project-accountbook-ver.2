@@ -1,6 +1,6 @@
 main {
     position: absolute;
-    top: 210px;
+    top: 290px;
     left: 0;
     display: flex;
     flex-wrap: wrap;
@@ -23,17 +23,17 @@ main {
 .errors, .errors-msg {
     border-color: #dc3545;
     color: red;
-    font-size: 12px;
+    /*font-size: 12px;*/
     font-weight: bold;
 }
 
 .errors-msg {
     display: block;
     width: 100%;
-    text-align: right;
+    /*text-align: right;*/
 }
 
-.td-sign-up {
+.td-sign-up, .td-sign-in {
     width: 130px;
 }
 

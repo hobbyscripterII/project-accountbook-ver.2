@@ -2,6 +2,7 @@ package com.project.softaccountbook.user;
 
 import com.project.softaccountbook.common.Utils;
 import com.project.softaccountbook.user.model.UserEmailAuthDto;
+import com.project.softaccountbook.user.model.UserEmailSignInDto;
 import com.project.softaccountbook.user.model.UserSignUpDto;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -11,10 +12,6 @@ import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
-
-import javax.naming.Binding;
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 
 @Slf4j
 @Controller
@@ -47,13 +44,21 @@ public class UserController {
         if (bindingResult.hasErrors()) {
             return "/sign-up";
         }
-        return null;
+
+        return null; // security, JWT 적용 후 추가 예정
     }
 
     @GetMapping("/sign-in")
-    public String signIn() {
+    public String signIn(Model model) {
+        model.addAttribute("dto", new UserEmailSignInDto());
         return "/sign-in";
     }
+
+//    @PostMapping("/sign-in")
+//    public String signIn(@ModelAttribute UserEmailSignInDto dto) {
+//        log.info("spring security 접근 성공");
+//        return "/";
+//    }
 
     @GetMapping("/sign-out")
     public String signOut() {
@@ -63,17 +68,16 @@ public class UserController {
     // 닉네임 중복 검사
     @GetMapping("/nm-chk")
     @ResponseBody
-    public int nmChk(@RequestParam String nm) {
+    public int nmChk(@RequestParam(name = "nm") String nm) { // @RequestParam name 속성 생략 시 spring security doFilter에 의해 에러 발생
         return service.nmChk(nm);
     }
 
     // 이메일 발송
-    @GetMapping("/email-send")
+    @GetMapping("/email/send")
     @ResponseBody
-    public int emailSend(String email) {
+    public int emailSend(@RequestParam(name = "email") String email) {
         boolean emailSend = service.emailSend(email);
         int emailChk = service.emailChk(email);
-
         if (Utils.isNotNull(emailChk)) { // 이메일 중복
             return 2;
         } else if (!Utils.isNotNull(emailSend)) { // 이메일 전송 실패
@@ -83,7 +87,7 @@ public class UserController {
     }
 
     // 이메일 인증 코드 확인
-    @PostMapping("/email-auth-chk")
+    @PostMapping("/email/auth-chk")
     @ResponseBody
     public int emailAuthCodeChk(@RequestBody UserEmailAuthDto dto) { // json으로 받을 때 @RequestBody 명시
         int emailAuthCodeChk = service.emailAuthCodeChk(dto);

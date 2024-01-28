@@ -59,7 +59,7 @@ function emailSend() {
     } else {
         $.ajax({
             type: 'get',
-            url: '/email-send',
+            url: '/email/send',
             data: {email : email},
             success: function (data) {
                 if (data === 2) {
@@ -73,6 +73,31 @@ function emailSend() {
             }
         })
     }
+}
+
+function emailAuthChk() {
+    const email = $('input[name=email]').val();
+    const emailAuthCode = $('#input-email-auth-code');
+    // dto에 담으려면 프로퍼티명이랑 맞추기
+    const dto = {email : email, emailAuthCode: emailAuthCode.val()};
+
+    $.ajax({
+        type: 'post',
+        url: '/email/auth-chk',
+        contentType: "application/json", // http 요청 헤더 content-type을 application/json으로 맞춤
+        data: JSON.stringify(dto), // json 형태로 보내기 위한 작업
+        success: function (data) {
+            if (data === 1) {
+                alert("이메일 인증이 완료되었습니다.");
+                emailAuthCode.data('email-auth-chk', 1); // data-set 속성 변경
+                console.log(emailAuthCode.data('email-auth-chk')); // data-set 속성 확인
+            } else {
+                alert("이메일 인증 코드가 일치하지 않습니다.");
+                emailAuthCode.data('email-auth-chk', 0);
+                console.log(emailAuthCode.data('email-auth-chk'));
+            }
+        }
+    })
 }
 
 function nmChk() {
@@ -98,29 +123,4 @@ function nmChk() {
             }
         })
     }
-}
-
-function emailAuthChk() {
-    const email = $('input[name=email]').val();
-    const emailAuthCode = $('#input-email-auth-code');
-    // dto에 담으려면 프로퍼티명이랑 맞추기
-    const dto = {email : email, emailAuthCode: emailAuthCode.val()};
-
-    $.ajax({
-        type: 'post',
-        url: '/email-auth-chk',
-        contentType: "application/json", // http 요청 헤더 content-type을 application/json으로 맞춤
-        data: JSON.stringify(dto), // json 형태로 보내기 위한 작업
-        success: function (data) {
-            if (data === 1) {
-                alert("이메일 인증이 완료되었습니다.");
-                emailAuthCode.data('email-auth-chk', 1); // data-set 속성 변경
-                console.log(emailAuthCode.data('email-auth-chk')); // data-set 속성 확인
-            } else {
-                alert("이메일 인증 코드가 일치하지 않습니다.");
-                emailAuthCode.data('email-auth-chk', 0);
-                console.log(emailAuthCode.data('email-auth-chk'));
-            }
-        }
-    })
 }
