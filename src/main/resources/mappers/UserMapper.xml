@@ -5,10 +5,6 @@
         VALUES (#{email}, #{upw}, #{nm}, #{gender}, #{age}, NOW(), (SELECT IFNULL(MAX(iuser) + 1, 1) FROM user_tbl u))
     </insert>
 
-    <select id="emailSignIn">
-        SELECT iuser, upw, nm FROM user_tbl WHERE email = #{email}
-    </select>
-    
     <delete id="withdrawal">
         DELETE FROM user_tbl
         WHERE iuser = #{iuser}
@@ -37,5 +33,9 @@
 
     <select id="emailAuthCodeChk">
         SELECT COUNT(*) FROM email_auth_tbl WHERE email = #{email} AND email_auth_code = #{emailAuthCode}
+    </select>
+
+    <select id="emailSignIn">
+        SELECT email FROM user_tbl WHERE email = #{email} AND upw = #{upw}
     </select>
 </mapper>

@@ -31,14 +31,10 @@ public class UserService {
         return mapper.updateVisitCnt(iuser);
     }
 
-    String randomCode() {
-        return String.valueOf(UUID.randomUUID()).substring(0, 5);
-    }
-
     boolean emailSend(String email) {
         String from = this.email;
         String to = email;
-        String randomCode = randomCode();
+        String randomCode = String.valueOf(UUID.randomUUID()).substring(0, 5);
 
         String title = "말랑이 가계부 회원가입 인증 이메일입니다.";
         StringBuilder content_ = new StringBuilder();

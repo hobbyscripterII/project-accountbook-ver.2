@@ -2,14 +2,12 @@ package com.project.softaccountbook.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.provisioning.InMemoryUserDetailsManager;
-import org.springframework.security.provisioning.UserDetailsManager;
 import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
@@ -31,7 +29,7 @@ public class SecurityConfiguration { // 스프링 컨테이너가 호출함
                         .permitAll())
                 // 인증, 인가에서 예외 발생시 커스텀 예외 처리 핸들러
                 .exceptionHandling(e -> e
-                        .accessDeniedPage("/error/403")) // 예외 발생 시 접근 제한 페이지 설정
+                        .accessDeniedPage("/admin/access-denied")) // 예외 발생 시 접근 제한 페이지 설정
                 // 접근 권한 확인 및 접근 허용 여부 결정
                 .authorizeHttpRequests(a -> a
                         .requestMatchers(
@@ -42,11 +40,14 @@ public class SecurityConfiguration { // 스프링 컨테이너가 호출함
                                 "/sign-out",
                                 "/email/**", // 이메일 전송 / 이메일 인증코드 확인
                                 "/nm-chk",
-                                "/error/**"
+                                "/error/**",
+                                "/admin/access-denied"
                         ).permitAll() // 인가 필요 x
+                        .requestMatchers(
+                                "/admin/**"
+                        ).hasRole("ADMIN")
                         .anyRequest()
                         .authenticated());
-//                        .addFilterBefore();
         return http.build();
     }
 
@@ -62,8 +63,8 @@ public class SecurityConfiguration { // 스프링 컨테이너가 호출함
         return new InMemoryUserDetailsManager(userDetails);
     }
 
-//    @Bean
-//    public PasswordEncoder passwordEncoder() { // 비밀번호 암호화
-//        return new BCryptPasswordEncoder();
-//    }
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
 }
